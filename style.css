@@ -195,6 +195,7 @@ header .theme-toggle:hover {
     display: flex;
     gap: 12px;
     font-weight: 500;
+    margin-left: auto;
     align-items: center;
     justify-content: center;
     padding: 12px 25px;
@@ -215,9 +216,111 @@ header .theme-toggle:hover {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
-.gallery-grid .result-img {
-    width: 90%;
-    height: 90%;
-    margin-top: 10px;
+.gallery-grid .img-card .result-img {
+    width: 100%;
+    height: 100%;
+    
     border-radius: 10px;
+    object-fit: cover;
+}
+
+.gallery-grid .img-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border-radius: 16px;
+    background: #6767a6;
+    transition: all 0.5s ease;
+}
+
+.gallery-grid .img-card:not(.loading, .error):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-grid .img-card:is(.loading, .error) :is(.result-img, .img-overlay) {
+    display: none;
+}
+
+.gallery-grid .img-card .img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: flex-end;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    transition: all 0.6s ease;
+}
+
+.gallery-grid .img-card:hover .img-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.gallery-grid .img-card .img-download-btn {
+    height: 40px;
+    width: 40px;
+    color: #fff;
+    backdrop-filter: blur(5);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+}
+
+.gallery-grid .img-card .img-download-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.gallery-grid .img-card .status-container {
+    padding: 15px;
+    display: none;
+    gap: 13px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-grid .img-card:where(.loading, .error) .status-container {
+    display: flex;
+}
+
+.gallery-grid .img-card.loading .spinner,
+.gallery-grid .img-card.error .status-container svg {
+    display: block;
+}
+
+.gallery-grid .img-card.error .status-container svg {
+    font-size: 1.7rem;
+    color: #e63939;
+}
+
+.gallery-grid .img-card.loading .spinner {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid rgb(78, 80, 153);
+    border-top-color: blue;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.gallery-grid .img-card .status-text {
+    font-size: 1rem;
+    text-align: center;
+    color: #b0b0c0;
 }
