@@ -230,10 +230,13 @@ header .theme-toggle:hover {
     box-shadow: 0 4px 10px rgba(109, 40, 217, 0.3);
 }
 
+.main-content .gallery-grid:has(.img-card) {
+    margin-top: 30px;
+}
+
 .main-content .gallery-grid {
     display: grid;
     gap: 15px;
-    margin-top: 30px;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
@@ -331,7 +334,7 @@ header .theme-toggle:hover {
     border-radius: 50%;
     border: 3px solid rgb(78, 80, 153);
     border-top-color: blue;
-    /* animation: spin 1s linear infinite; */
+     animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
